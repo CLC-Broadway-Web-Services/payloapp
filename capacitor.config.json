@@ -1,6 +1,7 @@
 {
-	"appId": "io.ionic.starter",
-	"appName": "newUserApp",
+	"appId": "com.theron.paylo",
+	"appName": "PayLo",
 	"webDir": "www",
-	"bundledWebRuntime": false
+	"bundledWebRuntime": false,
+  "linuxAndroidStudioPath": "/snap/android-studio/current/android-studio/bin/studio.sh"
 }
