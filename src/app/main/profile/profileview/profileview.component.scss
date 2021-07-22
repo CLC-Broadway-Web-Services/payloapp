@@ -1,0 +1,30 @@
+.userAvatarBig ion-icon {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+.userAvatarBig div {
+  max-width: 200px;
+  max-height: 200px;
+  margin: 0 auto;
+  position: relative;
+}
+.userAvatarBig img {
+  width: 100%;
+  height: 100%;
+  border-radius: 15%;
+}
+// #verificationList ion-list-header,
+// #verificationList ion-item,
+#connectionsList ion-list-header,
+#connectionsList ion-item,
+#profileDetailsList ion-list-header,
+#profileDetailsList ion-item {
+  --padding-start: 0;
+  --padding-end: 0;
+  margin: 0;
+  padding: 0;
+}
+#profileDetailsList ion-item ion-text {
+  margin-right: 0 !important;
+}

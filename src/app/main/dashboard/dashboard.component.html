@@ -1,0 +1,75 @@
+<ion-content class="ion-padding">
+  <app-header></app-header>
+  <ion-card id="statsBar">
+    <ion-row>
+      <ion-col size="5">
+        <ngx-circular-progress [value]="78" [color]="'#3880ff'" [txtColor]="'#3880ff'"></ngx-circular-progress>
+      </ion-col>
+      <ion-col size="7">
+        <div class="verticalCenter">
+          <ion-text>
+            <h3>Weekly Progress</h3>
+          </ion-text>
+          <ion-text color="primary"><b>14/22</b> completed tasks</ion-text>
+          <ion-card-subtitle></ion-card-subtitle>
+        </div>
+      </ion-col>
+      <ion-icon size="lg" name="bar-chart-outline"></ion-icon>
+    </ion-row>
+  </ion-card>
+
+  <ion-item button lines="none" detail="false">
+    <ion-label>
+      <b>You have 5 tasks for today</b>
+    </ion-label>
+    <ion-icon name="calendar-outline" slot="end"></ion-icon>
+  </ion-item>
+
+  <div class="dashTasksList">
+
+    <div class="task">
+      <ion-card class="flexCard facebookBg" (click)="taskService.presentModal()">
+        <ion-card-content>
+          <ion-text>
+            <h2>Facebook Task <b>(15 <span [innerHtml]="global.sign"></span>)</b></h2>
+            <b>Like, Comment, Share</b> <br />(inProgress)
+          </ion-text>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <div class="task">
+      <ion-card class="flexCard youtubeBg" (click)="taskService.presentModal()">
+        <ion-card-content>
+          <ion-text>
+            <h2>YouTube Task <b>(15 <span [innerHtml]="global.sign"></span>)</b></h2>
+            <b>Like, Comment</b> <br />(inProgress)
+          </ion-text>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <div class="task">
+      <ion-card class="flexCard instagramBg" (click)="taskService.presentModal()">
+        <ion-card-content>
+          <ion-text>
+            <h2>Instagram Task <b>(15 <span [innerHtml]="global.sign"></span>)</b></h2>
+            <b>Like, Follow</b> <br />(waiting)
+          </ion-text>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <div class="task">
+      <ion-card class="flexCard twitterBg" (click)="taskService.presentModal()">
+        <ion-card-content>
+          <ion-text>
+            <h2>Twitter Task <b>(15 <span [innerHtml]="global.sign"></span>)</b></h2>
+            <b>Re-Tweet</b> <br />(waiting)
+          </ion-text>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+  </div>
+</ion-content>

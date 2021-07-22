@@ -239,3 +239,19 @@ ion-button.shadow:hover {
   background: var(--ion-color-light);
   color: var(--ion-color-dark);
 }
+.showTaskPopup {
+  --height: 90%;
+  align-items: flex-end;
+}
+.showTaskPopup .modal-wrapper {
+  background: #fff;
+  border-radius: 15px 15px 0 0;
+}
+
+.showTaskPopup .modal-wrapper ion-toolbar,
+.showTaskPopup .modal-wrapper ion-content,
+.showTaskPopup .modal-wrapper ion-list,
+.showTaskPopup .modal-wrapper ion-item{
+  --background: transparent !important;
+  background: transparent !important;
+}

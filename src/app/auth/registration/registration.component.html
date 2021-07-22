@@ -1,0 +1,97 @@
+<ion-button size="large" fill="clear" color="light" class="ion-no-padding ion-padding-end"
+  (click)="globalService.back()">
+  <ion-icon size="large" name="chevron-back-outline"></ion-icon>
+</ion-button>
+<!-- <ion-buttons slot="start">
+  <ion-back-button fill="clear" color="light" class="ion-no-padding ion-padding-end" text="" icon="chevron-back-outline" defaultHref="auth"></ion-back-button>
+</ion-buttons> -->
+
+<div class="authMiddlePanel ion-padding-top">
+  <ion-text color="light">
+    <h1>
+      Create Account
+    </h1>
+  </ion-text>
+</div>
+
+<div id="bottomPanel" class="waves authForm">
+  <form [formGroup]="registerForm" (ngSubmit)="onRegisterSubmit()">
+    <ion-grid>
+      <ion-row class="ion-align-items-center">
+        <ion-col size="12" size-md="6">
+          <ion-item lines="none" class="customInputItem">
+            <ion-icon name="person-circle-outline"></ion-icon>
+            <ion-icon color="success" slot="end" name="checkmark-done-circle-outline"
+              *ngIf="registerForm.controls.name.valid"></ion-icon>
+            <ion-icon color="danger" slot="end" name="close-circle-outline"
+              *ngIf="registerForm.controls.name.invalid && (registerForm.controls.name.dirty || registerForm.controls.name.touched)">
+            </ion-icon>
+            <ion-input formControlName="name" placeholder="Full Name" autocomplete="off"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12" size-md="6">
+          <ion-item lines="none" class="customInputItem">
+            <ion-icon name="at-outline"></ion-icon>
+            <ion-icon color="success" slot="end" name="checkmark-done-circle-outline"
+              *ngIf="registerForm.controls.email.valid"></ion-icon>
+            <ion-icon color="danger" slot="end" name="close-circle-outline"
+              *ngIf="registerForm.controls.email.invalid && (registerForm.controls.email.dirty || registerForm.controls.email.touched)">
+            </ion-icon>
+            <ion-input formControlName="email" placeholder="Email" type="email" autocomplete="off"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12" size-md="6">
+          <ion-item lines="none" class="customInputItem">
+            <ion-icon name="call-outline"></ion-icon>
+            <ion-icon color="success" slot="end" name="checkmark-done-circle-outline"
+              *ngIf="registerForm.controls.mobile.valid"></ion-icon>
+            <ion-icon color="danger" slot="end" name="close-circle-outline"
+              *ngIf="registerForm.controls.mobile.invalid && (registerForm.controls.mobile.dirty || registerForm.controls.mobile.touched)">
+            </ion-icon>
+            <ion-input formControlName="mobile" placeholder="Mobile" type="tel" autocomplete="off"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12" size-md="6">
+          <ion-item lines="none" class="customInputItem">
+            <ion-icon name="lock-closed-outline"></ion-icon>
+            <ion-icon color="success" slot="end" name="checkmark-done-circle-outline"
+              *ngIf="registerForm.controls.password.valid"></ion-icon>
+            <ion-icon color="danger" slot="end" name="close-circle-outline"
+              *ngIf="registerForm.controls.password.invalid && (registerForm.controls.password.dirty || registerForm.controls.password.touched)">
+            </ion-icon>
+            <ion-input formControlName="password" placeholder="Password" type="password" autocomplete="off"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12" size-md="6">
+          <ion-item lines="none" class="customInputItem">
+            <ion-icon name="lock-closed-outline"></ion-icon>
+            <ion-icon color="success" slot="end" name="checkmark-done-circle-outline"
+              *ngIf="registerForm.controls.confirmPassword.valid"></ion-icon>
+            <ion-icon color="danger" slot="end" name="close-circle-outline"
+              *ngIf="registerForm.controls.confirmPassword.invalid && (registerForm.controls.confirmPassword.dirty || registerForm.controls.confirmPassword.touched)">
+            </ion-icon>
+            <ion-input formControlName="confirmPassword" placeholder="Confirm Password" type="password"
+              autocomplete="off"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12" size-md="6">
+          <ion-item lines="none" class="customInputItem">
+            <ion-icon name="ticket-outline"></ion-icon>
+            <ion-icon color="success" slot="end" name="checkmark-done-circle-outline"
+              *ngIf="registerForm.controls.invitecode.valid && inviteCodeValid"></ion-icon>
+            <ion-icon color="danger" slot="end" name="close-circle-outline"
+              *ngIf="registerForm.controls.invitecode.invalid || !inviteCodeValid && (registerForm.controls.invitecode.dirty || registerForm.controls.invitecode.touched)">
+            </ion-icon>
+            <ion-input formControlName="invitecode" placeholder="Invite Code" autocapitalize="characters"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-align-items-center">
+        <ion-col size="12">
+          <ion-button shape="round" class="shadow" color="primary" expand="block" type="submit"
+            [disabled]="registerForm.invalid">Sign up</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</div>

@@ -1,0 +1,90 @@
+<ion-content class="ion-padding">
+  <!-- <app-header></app-header> -->
+  <ion-row>
+    <ion-col size-sm="6" size="12" style="text-align: center;" class="userAvatarBig">
+      <div>
+        <input type="file" hidden name="profieImage" #userPhoto (change)="onFileSelected($event)">
+        <ion-icon name="create" size="large" color="primary" (click)="userPhoto.click()"></ion-icon>
+        <img [src]="userData && userData.photoURL ? userData.photoURL : defaultProfileImage">
+      </div>
+    </ion-col>
+    <ion-col size-sm="6" size="12">
+      <ion-list id="profileDetailsList">
+        <ion-list-header lines="inset">
+          <ion-label>Details</ion-label>
+        </ion-list-header>
+        <ion-item>
+          <ion-label>
+            {{userData && userData.displayName ? userData.displayName : ''}}
+          </ion-label>
+          <ion-text slot="end" (click)="showNameForm()">
+            <ion-icon name="create-outline" size="large" color="primary"></ion-icon>
+          </ion-text>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            {{userData && userData.phoneNumber ? userData.phoneNumber : ''}}<br />
+            <ion-badge color="danger" *ngIf="!phoneVerified">Not Verified</ion-badge>
+            <ion-badge color="success" *ngIf="phoneVerified">Verified</ion-badge>
+          </ion-label>
+          <ion-text slot="end">
+            <ion-icon name="chevron-forward-circle-outline" size="large" color="danger" *ngIf="!phoneVerified">
+            </ion-icon>
+            <ion-icon name="checkmark-done-circle-outline" size="large" color="success" *ngIf="phoneVerified">
+            </ion-icon>
+          </ion-text>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            {{userData && userData.email ? userData.email : ''}}<br />
+            <ion-badge color="danger" *ngIf="!emailVerified">Not Verified</ion-badge>
+            <ion-badge color="success" *ngIf="emailVerified">Verified</ion-badge>
+          </ion-label>
+          <ion-text slot="end">
+            <ion-button color="danger" *ngIf="!emailVerified" (click)="sendEmailVerification()">
+              Verify
+            </ion-button>
+            <ion-icon name="checkmark-done-circle-outline" size="large" color="success" *ngIf="emailVerified">
+            </ion-icon>
+          </ion-text>
+        </ion-item>
+        <ion-item>
+          <ion-label>{{userData && userData.dob ? (userData.dob | date:"mediumDate") : ''}}</ion-label>
+          <ion-text slot="end" (click)="shoeDOBForm()">
+            <ion-icon name="create-outline" size="large" color="primary"></ion-icon>
+          </ion-text>
+        </ion-item>
+        <ion-item>
+          <ion-label>{{userData && userData.city ? userData.city : 'City'}} / {{userData && userData.state ?
+            userData.state : 'State'}}</ion-label>
+          <ion-text slot="end" (click)="showCityForm()">
+            <ion-icon name="create-outline" size="large" color="primary"></ion-icon>
+          </ion-text>
+        </ion-item>
+      </ion-list>
+      <ion-list id="connectionsList">
+        <ion-list-header lines="inset">
+          <ion-label>Connections</ion-label>
+        </ion-list-header>
+        <ion-item>
+          <ion-label>Facebook</ion-label>
+          <ion-text slot="end">
+            <ion-icon name="chevron-forward-circle-outline" size="large" color="danger" (click)="auth.linkFacebook()" *ngIf="!auth.facebookConnected">
+            </ion-icon>
+            <ion-icon name="checkmark-done-circle-outline" size="large" color="success" *ngIf="auth.facebookConnected">
+            </ion-icon>
+          </ion-text>
+        </ion-item>
+        <ion-item>
+          <ion-label>Google</ion-label>
+          <ion-text slot="end">
+            <ion-icon name="chevron-forward-circle-outline" size="large" color="danger" (click)="auth.linkGoogle()" *ngIf="!auth.googleConnected">
+            </ion-icon>
+            <ion-icon name="checkmark-done-circle-outline" size="large" color="success" *ngIf="auth.googleConnected">
+            </ion-icon>
+          </ion-text>
+        </ion-item>
+      </ion-list>
+    </ion-col>
+  </ion-row>
+</ion-content>
