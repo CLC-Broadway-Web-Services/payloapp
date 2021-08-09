@@ -7,6 +7,8 @@ import { ProfileeditComponent } from './profileedit/profileedit.component';
 import { ProfileviewComponent } from './profileview/profileview.component';
 import { IonicModule } from '@ionic/angular';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { ImageCropperModule } from 'ngx-image-cropper';
+// import { NgxImageCompressService } from 'ngx-image-compress';
 
 
 @NgModule({
@@ -15,7 +17,9 @@ import { SharedModule } from 'src/app/shared/shared.module';
     CommonModule,
     IonicModule,
     SharedModule,
-    ProfileRoutingModule
-  ]
+    ProfileRoutingModule,
+    ImageCropperModule
+  ],
+  // providers: [NgxImageCompressService],
 })
 export class ProfileModule { }

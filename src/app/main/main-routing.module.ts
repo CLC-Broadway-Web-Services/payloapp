@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './main.component';
-import { AngularFireAuthGuard, redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/auth-guard';
 
 const routes: Routes = [
   {
@@ -10,23 +9,23 @@ const routes: Routes = [
     children: [
       {
         path: 'dashboard',
-        loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
-      },
-      {
-        path: 'referrals',
-        loadChildren: () => import('./referral/referral.module').then(m => m.ReferralModule)
+        loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule), data: {animation: 'FilterPage'} 
       },
       {
         path: 'tasks',
-        loadChildren: () => import('./tasks/tasks.module').then(m => m.TasksModule)
+        loadChildren: () => import('./tasks/tasks.module').then(m => m.TasksModule), data: {animation: 'FilterPage'} 
       },
       {
         path: 'earnings',
-        loadChildren: () => import('./earnings/earnings.module').then(m => m.EarningsModule)
+        loadChildren: () => import('./earnings/earnings.module').then(m => m.EarningsModule), data: {animation: 'FilterPage'} 
+      },
+      {
+        path: 'referrals',
+        loadChildren: () => import('./referral/referral.module').then(m => m.ReferralModule), data: {animation: 'HomePgae'} 
       },
       {
         path: 'profile',
-        loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule)
+        loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule), data: {animation: 'AboutPage'} 
       },
       {
         path: '',

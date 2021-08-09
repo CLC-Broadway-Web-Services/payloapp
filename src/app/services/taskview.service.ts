@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 import { BehaviorSubject } from 'rxjs';
+import { Task } from '../interfaces/tasks';
+import { TaskhelpComponent } from '../shared/taskhelp/taskhelp.component';
 import { TaskviewComponent } from '../shared/taskview/taskview.component';
 
 @Injectable({
@@ -11,7 +13,10 @@ export class TaskviewService {
   public taskView = new BehaviorSubject<boolean>(false);
   public taskData = '';
 
-  constructor(public modalController: ModalController) { }
+  constructor(
+    public modalController: ModalController,
+    public alertController: AlertController
+  ) { }
 
   toggleTaskView(taskId) {
     this.taskData = taskId;
@@ -22,11 +27,28 @@ export class TaskviewService {
     return this.taskView.asObservable();
   }
 
-  async presentModal() {
+  async presentTaskModal(task: Task, taskType) {
+    console.log(task)
+    console.log(taskType)
     const modal = await this.modalController.create({
       component: TaskviewComponent,
       componentProps: {
-        'firstName': 'Douglas'
+        fullTask: task,
+        taskType: taskType
+      },
+      cssClass: 'showTaskPopup2',
+      swipeToClose: true,
+      mode: 'ios'
+    });
+    return await modal.present();
+  }
+
+  async presentHelpModal(platform, task) {
+    const modal = await this.modalController.create({
+      component: TaskhelpComponent,
+      componentProps: {
+        taskPlatfrom: platform,
+        taskType: task,
       },
       cssClass: 'showTaskPopup',
       swipeToClose: true,
@@ -38,5 +60,6 @@ export class TaskviewService {
   dismissModal() {
     this.modalController.dismiss();
   }
+  
 
 }

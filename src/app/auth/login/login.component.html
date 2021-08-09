@@ -24,7 +24,7 @@
           *ngIf="loginForm.controls.email.valid"></ion-icon>
           <ion-icon color="danger" slot="end" name="close-circle-outline"
           *ngIf="loginForm.controls.email.invalid && (loginForm.controls.email.dirty || loginForm.controls.email.touched)"></ion-icon>
-          <ion-input formControlName="email" placeholder="Email" type="email" autocomplete="off"></ion-input>
+          <ion-input formControlName="email" placeholder="Email" type="email" autocomplete="loginEMail" autocorrect="off"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col size="12" size-md="6">
@@ -34,7 +34,7 @@
           *ngIf="loginForm.controls.password.valid"></ion-icon>
           <ion-icon color="danger" slot="end" name="close-circle-outline"
           *ngIf="loginForm.controls.password.invalid && (loginForm.controls.password.dirty || loginForm.controls.password.touched)"></ion-icon>
-          <ion-input formControlName="password" placeholder="Password" type="password" autocomplete="off"></ion-input>
+          <ion-input formControlName="password" placeholder="Password" type="password" autocomplete="loginPassword" autocorrect="off"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col size="12">

@@ -1,4 +1,5 @@
 export interface inviteCode {
   code: string,
-  uid: string
+  uid: string,
+  name: string
 }

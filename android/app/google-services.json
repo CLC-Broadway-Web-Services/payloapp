@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "266350440925",
+    "project_id": "noworkneeded",
+    "storage_bucket": "noworkneeded.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:266350440925:android:7584f7e13b666fcb9ec634",
+        "android_client_info": {
+          "package_name": "com.thevanar.paylo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "266350440925-613gclpi0d549dmbfpm3hbfbiisi6ro0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBrnquzkZJvO3ctQgilZYuglHfIRmJuOH4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "266350440925-613gclpi0d549dmbfpm3hbfbiisi6ro0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Profile } from 'src/app/interfaces/profile';
+import { Wallet } from 'src/app/interfaces/wallet';
 import { AuthService } from 'src/app/services/auth.service';
 // import { AuthService } from 'src/app/services/auth.service';
 
@@ -17,6 +18,7 @@ export class HeaderComponent implements OnInit {
 
   defaultAvatar = 'assets/default-avatar.png';
   userData: Profile;
+  userWallet: Wallet = null;
 
   constructor(
     public auth: AuthService
@@ -27,6 +29,10 @@ export class HeaderComponent implements OnInit {
       if (userdata) {
         console.log(userdata);
         this.userData = userdata;
+        this.auth.userWallet.asObservable().subscribe((wallet) => {
+          console.log(wallet);
+          this.userWallet = wallet;
+        })
         // this.emailVerified = userdata.emailVerified;
       }
     })

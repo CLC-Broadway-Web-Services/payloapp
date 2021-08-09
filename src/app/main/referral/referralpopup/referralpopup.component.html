@@ -1,0 +1,11 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title>{{headerText}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button onclick="dismissModal()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content fullscreen>
+  <div [innerHtml]="htmlDataToParse"></div>
+</ion-content>

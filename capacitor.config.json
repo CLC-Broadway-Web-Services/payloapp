@@ -1,7 +1,7 @@
 {
-	"appId": "com.theron.paylo",
+	"appId": "com.thevanar.paylo",
 	"appName": "PayLo",
 	"webDir": "www",
 	"bundledWebRuntime": false,
-  "linuxAndroidStudioPath": "/snap/android-studio/current/android-studio/bin/studio.sh"
+	"linuxAndroidStudioPath": "/snap/android-studio/current/android-studio/studio.sh"
 }

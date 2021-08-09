@@ -1,4 +1,5 @@
 export class Task {
+  id?: string = '';
   approvedBy?: string = '';
   campaignId: string = '';
   inProgress: boolean = false;
@@ -6,6 +7,7 @@ export class Task {
   isApproved:  boolean = false;
   isRejected:  boolean = false;
   isSubmitted:  boolean = false;
+  isExpired:  boolean = false;
   platform: string = '';
   platformTask: string = '';
   proof?: string = '';
@@ -13,4 +15,8 @@ export class Task {
   rejectedBy?: string = '';
   uid: string = '';
   url: string = '';
+  allotedDateNum: number = Date.now();
+  allotedDate: string = '';
+  approvedDate: number = 0;
+  pointPerTask: number = 0;
 }

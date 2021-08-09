@@ -28,3 +28,22 @@
 #profileDetailsList ion-item ion-text {
   margin-right: 0 !important;
 }
+.imageCropperDiv {
+  background: rgb(0 0 0 / 51%);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  padding-top: 90px;
+}
+.imageCropperDiv > div {
+  // position: absolute;
+  // z-index: 99;
+  // top: 50%;
+  // transform: translateY(-50%);
+  width: 80%;
+  width: 95%;
+    margin: auto;
+}

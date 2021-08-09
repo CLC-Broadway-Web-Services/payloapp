@@ -4,10 +4,11 @@ import { HeaderComponent } from './header/header.component';
 import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 import { TaskviewComponent } from './taskview/taskview.component';
+import { TaskhelpComponent } from './taskhelp/taskhelp.component';
 
 
 @NgModule({
-  declarations: [HeaderComponent, TaskviewComponent],
+  declarations: [HeaderComponent, TaskviewComponent, TaskhelpComponent],
   imports: [
     RouterModule,
     CommonModule,
@@ -15,7 +16,8 @@ import { TaskviewComponent } from './taskview/taskview.component';
   ],
   exports: [
     HeaderComponent,
-    TaskviewComponent
+    TaskviewComponent,
+    TaskhelpComponent
   ]
 })
 export class SharedModule { }
