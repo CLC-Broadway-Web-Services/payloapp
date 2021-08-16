@@ -2,10 +2,32 @@
   <ion-toolbar>
     <ion-title>{{headerText}}</ion-title>
     <ion-buttons slot="end">
-      <ion-button onclick="dismissModal()">Close</ion-button>
+      <ion-button (click)="dismissModal()">Close</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content fullscreen>
-  <div [innerHtml]="htmlDataToParse"></div>
+  <!-- <div  class="ion-padding" [innerText]="htmlDataToParse"></div> -->
+  <div class="ion-padding">
+    <ion-text>
+      <div class="ion-padding">
+        <h4>Referral / Invite System.</h4>
+        <p>You will get points when someone Join Paylo via your Invite Code.</p>
+      </div>
+      <ion-list>
+        <ion-item>
+          <ion-label>First 10 Joinings</ion-label>
+          <ion-text slot="end">5 <span [innerHtml]="global.sign"></span></ion-text>
+        </ion-item>
+        <ion-item>
+          <ion-label>Second 10 Joinings</ion-label>
+          <ion-text slot="end">3 <span [innerHtml]="global.sign"></span></ion-text>
+        </ion-item>
+        <ion-item>
+          <ion-label>After 20 Joinings</ion-label>
+          <ion-text slot="end">2 <span [innerHtml]="global.sign"></span></ion-text>
+        </ion-item>
+      </ion-list>
+    </ion-text>
+  </div>
 </ion-content>

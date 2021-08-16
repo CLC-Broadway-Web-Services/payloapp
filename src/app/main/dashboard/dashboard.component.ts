@@ -37,6 +37,7 @@ export class DashboardComponent implements OnInit {
 
         const todayDate = Date.now();
         const today = this.formatDate(todayDate);
+        console.log(today);
 
         const completedTasks = tasks.filter((task) => {
           return task.isApproved;

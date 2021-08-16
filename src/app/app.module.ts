@@ -22,6 +22,10 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 // import { FCM } from '@ionic-native/fcm/ngx';
 // import { USE_EMULATOR as USE_FUNCTIONS_EMULATOR } from '@angular/fire/functions';
 // import firebase from 'firebase/app';
+import { Facebook } from '@ionic-native/facebook/ngx';
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
+import { LottieSplashScreen } from '@ionic-native/lottie-splash-screen/ngx';
+import { AppPreferences } from '@ionic-native/app-preferences/ngx';
 
 
 
@@ -47,16 +51,20 @@ import { ImageCropperModule } from 'ngx-image-cropper';
   ],
   providers: [
     { provide: REGION, useValue: 'asia-south1' },
-    // { provide: USE_FUNCTIONS_EMULATOR, useValue: environment.useEmulators ? ['localhost', 5001] : undefined },
-  //  { provide: NEW_ORIGIN_BEHAVIOR, useValue: true },
-  //  { provide: ORIGIN, useValue: 'http://localhost:5000/' },
+    LottieSplashScreen,
     AuthService,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    Facebook,
+    GooglePlus,
+    AppPreferences
+    // { provide: USE_FUNCTIONS_EMULATOR, useValue: environment.useEmulators ? ['localhost', 5001] : undefined },
+    //  { provide: NEW_ORIGIN_BEHAVIOR, useValue: true },
+    //  { provide: ORIGIN, useValue: 'http://localhost:5000/' },
     // FCM,
     // Device,
     // BackgroundMode,
     // Autostart,
     // Firebase,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent],
 })

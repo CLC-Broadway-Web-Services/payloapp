@@ -108,7 +108,7 @@ export class ReferralComponent implements OnInit {
   currentUserData: Profile;
 
   contentForTerms: string = 'Terms of service content.';
-  contentForHowTo: string = 'How Invite system works content.';
+  contentForHowTo: string = '<ion-text> <div class="ion-padding"> <h4>Referral / Invite System.</h4> <p>You will get points when someone Join Paylo via your Invite Code.</p> </div> <ion-list> <ion-item> <ion-label>First 10 Joinings</ion-label> <ion-text slot="end">5 Pts</ion-text> </ion-item> <ion-item> <ion-label>Second 10 Joinings</ion-label> <ion-text slot="end">3 Pts</ion-text> </ion-item> <ion-item> <ion-label>After 20 Joinings</ion-label> <ion-text slot="end">2 Pts</ion-text> </ion-item></ion-list></ion-text>';
 
   constructor(
     public global: GlobalFunctionsService,

@@ -37,9 +37,9 @@ export class TaskviewComponent implements OnInit {
     this.modalController.dismiss();
   }
 
-  openLink(link: string) {
-    window.open(link, '_system', 'location=yes'); return false;
-  }
+  // openLink(link: string) {
+  //   window.open(link, '_system', 'location=yes'); return false;
+  // }
 
   uploadedImageProof;
   upload(event, fullTask: Task) {

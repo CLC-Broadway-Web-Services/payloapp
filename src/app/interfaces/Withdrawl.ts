@@ -16,4 +16,6 @@ export interface Withdrawl {
   upi_id: string;
   timeUpdated?: number;
   timeCreated: number;
+  user_email: string;
+  user_name: string;
 }

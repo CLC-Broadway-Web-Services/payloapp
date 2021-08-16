@@ -42,8 +42,8 @@ export class EarningsComponent implements OnInit {
   upiForm: FormGroup;
 
   // test variables only
-  detailsTrue = true;
-  testUserId = "8jv3uzHBppfj0TesSzRjbD07KLp2";
+  // detailsTrue = true;
+  // testUserId = "8jv3uzHBppfj0TesSzRjbD07KLp2";
 
   constructor(
     public global: GlobalFunctionsService,
@@ -61,8 +61,14 @@ export class EarningsComponent implements OnInit {
       uid: ['', [Validators.required]],
       amount: [50, [Validators.required, Validators.min(50)]],
       isRequested: [true, [Validators.required]],
+      isCompleted: [false, [Validators.required]],
+      isRejected: [false, [Validators.required]],
+      isOnHold: [false, [Validators.required]],
       upi_id: [this.myWallet.userUpi, [Validators.required]],
       timeCreated: [''],
+      timeUpdated: [''],
+      user_email: [this.myWallet.userUpi, [Validators.required]],
+      user_name: [this.myWallet.userUpi, [Validators.required]],
     });
     this.upiForm = this.fb.group({
       userUpi: ['', [Validators.required]]
@@ -194,6 +200,7 @@ export class EarningsComponent implements OnInit {
       this.auth.afs.doc(`pointsWallet/${this.myWallet.uid}`).set(this.upiForm.value, { merge: true }).then(() => {
         // this.auth.afs.doc(`pointsWallet/${this.testUserId}`).set(this.upiForm.value, { merge: true }).then(() => {
         this.loader.stopLoader();
+        this.showUpiForm = false;
       }).catch((err) => {
         alert(err.message);
         this.loader.stopLoader();
@@ -203,38 +210,42 @@ export class EarningsComponent implements OnInit {
 
   async createWithdrawlRequest() {
     if (this.walletForm.valid && this.myWallet.uid) {
-      this.walletForm.controls.timeCreated.patchValue(Date.now());
       this.loader.showLoader();
-      console.log(this.walletForm.valid)
-      this.auth.afs.collection(`pointsConvertion`).add(this.walletForm.value).then((response) => {
-        console.log(response)
-        // new data
-        const pointsToDeduct = this.walletForm.controls.points.value;
-        const amountToDeduct = this.walletForm.controls.amount.value;
+      this.walletForm.controls.timeCreated.patchValue(Date.now());
+      this.walletForm.controls.timeUpdated.patchValue(Date.now());
+      this.auth.userData.asObservable().subscribe((data) => {
+        this.walletForm.controls.user_email.patchValue(data.email);
+        this.walletForm.controls.user_name.patchValue(data.displayName);
+        console.log(this.walletForm.valid)
+        this.auth.afs.collection(`pointsConvertion`).add(this.walletForm.value).then((response) => {
+          console.log(response)
+          // new data
+          const pointsToDeduct = this.walletForm.controls.points.value;
+          const amountToDeduct = this.walletForm.controls.amount.value;
 
-        const newData = {
-          currentPoints: this.myWallet.currentPoints - pointsToDeduct,
-          totalConvertedPoints: this.myWallet.totalConvertedPoints + pointsToDeduct,
-          totalConvertedAmount: this.myWallet.totalConvertedAmount + amountToDeduct,
-          uid: this.myWallet.uid,
-          userUpi: this.myWallet.userUpi,
-          convertionRateInitial: this.myWallet.convertionRateInitial
-        }
-        this.auth.afs.doc(`pointsWallet/${this.myWallet.uid}`).set(newData, { merge: true })
-          .then((response) => {
-            console.log(response)
-            this.loader.stopLoader();
-          })
-          .catch((err) => {
-            console.log(err)
-            this.loader.stopLoader();
-            alert(err.message);
-          })
-      })
-        .catch((err) => {
+          const newData = {
+            currentPoints: this.myWallet.currentPoints - pointsToDeduct,
+            totalConvertedPoints: this.myWallet.totalConvertedPoints + pointsToDeduct,
+            totalConvertedAmount: this.myWallet.totalConvertedAmount + amountToDeduct,
+            uid: this.myWallet.uid,
+            userUpi: this.myWallet.userUpi,
+            convertionRateInitial: this.myWallet.convertionRateInitial
+          }
+          this.auth.afs.doc(`pointsWallet/${this.myWallet.uid}`).set(newData, { merge: true })
+            .then((response) => {
+              console.log(response)
+              this.loader.stopLoader();
+            })
+            .catch((err) => {
+              console.log(err)
+              this.loader.stopLoader();
+              alert(err.message);
+            })
+        }).catch((err) => {
           this.loader.stopLoader();
           alert(err.message);
         })
+      })
     }
   }
 

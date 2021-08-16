@@ -10,6 +10,7 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 import { Wallet } from '../interfaces/wallet';
 import { Task } from '../interfaces/tasks';
 import { map } from 'rxjs/operators';
+
 // import { FCM } from '@ionic-native/fcm/ngx';
 
 
@@ -141,6 +142,8 @@ export class AuthService {
           (ref) => ref
           .where('uid', '==', user.uid)
           .where('isSubmitted', '==', false)
+          .where('isApproved', '==', false)
+          .where('isExpired', '==', false)
             // .where('allotedDate', '>=', lastWeek)
             // .where('allotedDate', '<=', today)
             .orderBy('allotedDate', 'desc')
