@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AlertController, ModalController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
 import { BehaviorSubject } from 'rxjs';
 import { Task } from '../interfaces/tasks';
 import { TaskhelpComponent } from '../shared/taskhelp/taskhelp.component';
@@ -14,8 +14,7 @@ export class TaskviewService {
   public taskData = '';
 
   constructor(
-    public modalController: ModalController,
-    public alertController: AlertController
+    public modalController: ModalController
   ) { }
 
   toggleTaskView(taskId) {

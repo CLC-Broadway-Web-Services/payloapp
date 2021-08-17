@@ -1,6 +1,20 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        release {
+          storeFile file('/home/ahtesham/khairul_bhai/newUserApp/resources/userApkKey.keystore')
+          storePassword '23988725'
+          keyAlias 'userApkKey01'
+          keyPassword '23988725'
+        }
+      'release-debug' {
+            storeFile file('/home/ahtesham/khairul_bhai/newUserApp/resources/userApkKey.jks')
+            keyAlias 'userApkKey01'
+            storePassword '23988725'
+            keyPassword '23988725'
+        }
+    }
     compileSdkVersion rootProject.ext.compileSdkVersion
     defaultConfig {
         applicationId "com.thevanar.paylo"

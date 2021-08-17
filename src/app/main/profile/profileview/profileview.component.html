@@ -15,10 +15,10 @@
     </ion-col>
     <div class="imageCropperDiv" *ngIf="imageChangedEvent">
       <div>
-        <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true"
-          [aspectRatio]="1/1" [resizeToHeight]="256" [resizeToWidth]="256" [cropperMinHeight]="256"
-          [cropperMinWidth]="256" [onlyScaleDown]=true format="jpeg" (imageCropped)="imageCropped($event)"
-          (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()">
+        <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="1/1"
+          [resizeToHeight]="256" [resizeToWidth]="256" [cropperMinHeight]="256" [cropperMinWidth]="256"
+          [onlyScaleDown]=true format="jpeg" (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()"
+          (cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()">
         </image-cropper>
         <ion-button class="ion-margin-top" expand="block" (click)="imageUpload()">Upload</ion-button>
         <ion-button class="ion-margin-top" expand="block" color="danger" (click)="cancelCropping()">Cancel</ion-button>
@@ -47,7 +47,7 @@
             <ion-icon name="create-outline" size="large" color="primary"></ion-icon>
           </ion-text>
 
-<div style="display: none" id="recaptcha-container"></div>
+          <div style="display: none" id="recaptcha-container"></div>
 
           <!-- <ion-text slot="end">
             <ion-icon name="chevron-forward-circle-outline" size="large" color="danger" *ngIf="!phoneVerified">
@@ -89,7 +89,7 @@
           </ion-text>
         </ion-item>
       </ion-list>
-      <ion-list id="connectionsList">
+      <ion-list id="connectionsList" *ngIf="showSocial">
         <ion-list-header lines="inset">
           <ion-label>Connections</ion-label>
         </ion-list-header>

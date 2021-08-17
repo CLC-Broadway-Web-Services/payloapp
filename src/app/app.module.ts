@@ -25,7 +25,6 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 import { Facebook } from '@ionic-native/facebook/ngx';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { LottieSplashScreen } from '@ionic-native/lottie-splash-screen/ngx';
-import { AppPreferences } from '@ionic-native/app-preferences/ngx';
 
 
 
@@ -55,8 +54,7 @@ import { AppPreferences } from '@ionic-native/app-preferences/ngx';
     AuthService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     Facebook,
-    GooglePlus,
-    AppPreferences
+    GooglePlus
     // { provide: USE_FUNCTIONS_EMULATOR, useValue: environment.useEmulators ? ['localhost', 5001] : undefined },
     //  { provide: NEW_ORIGIN_BEHAVIOR, useValue: true },
     //  { provide: ORIGIN, useValue: 'http://localhost:5000/' },

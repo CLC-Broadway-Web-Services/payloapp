@@ -5,11 +5,12 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
 import { Router } from '@angular/router';
 import { Profile } from '../interfaces/profile';
 import { LoaderService } from './loader.service';
-import { AlertController } from '@ionic/angular';
+import { AlertController, Platform } from '@ionic/angular';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { Wallet } from '../interfaces/wallet';
 import { Task } from '../interfaces/tasks';
 import { map } from 'rxjs/operators';
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
 
 // import { FCM } from '@ionic-native/fcm/ngx';
 
@@ -46,6 +47,8 @@ export class AuthService {
     public ngZone: NgZone,
     public loader: LoaderService,
     public alertController: AlertController,
+    public googlePlus: GooglePlus,
+    public platform: Platform
     // private fcm: FCM
   ) {
     // this.linkSocialProfile();
@@ -140,10 +143,10 @@ export class AuthService {
 
         this.tasksListSubscription = this.afs.collectionGroup('tasks',
           (ref) => ref
-          .where('uid', '==', user.uid)
-          .where('isSubmitted', '==', false)
-          .where('isApproved', '==', false)
-          .where('isExpired', '==', false)
+            .where('uid', '==', user.uid)
+            .where('isSubmitted', '==', false)
+            .where('isApproved', '==', false)
+            .where('isExpired', '==', false)
             // .where('allotedDate', '>=', lastWeek)
             // .where('allotedDate', '<=', today)
             .orderBy('allotedDate', 'desc')
@@ -154,9 +157,9 @@ export class AuthService {
             return data;
           }))
         ).subscribe((tasks: Task[]) => {
-            console.log(tasks)
-            this.userTasks.next(tasks);
-          })
+          console.log(tasks)
+          this.userTasks.next(tasks);
+        })
         // }
         user.providerData.some((data) => {
           if (data.providerId == 'google.com') {
@@ -374,7 +377,11 @@ export class AuthService {
   }
   linkGoogle() {
     // return this.loader.showLoader().then(() =>
-    this.linkSocialProfile(new firebase.auth.GoogleAuthProvider())
+    if (this.platform.is('cordova')) {
+      this.nativeGoogleLogin();
+    } else {
+      this.linkSocialProfile(new firebase.auth.GoogleAuthProvider())
+    }
     // );
   }
   linkTwitter() {
@@ -391,6 +398,19 @@ export class AuthService {
   // not available providers
   // Instagram
   // LinkedIn
+
+  async nativeGoogleLogin(): Promise<void> {
+    try {
+      const gPlusUser = await this.googlePlus.login({
+        'webClientId': '266350440925-613gclpi0d549dmbfpm3hbfbiisi6ro0.apps.googleusercontent.com',
+        'offline': true,
+        'scopes': 'profile email'
+      })
+      return this.linkSocialProfile(firebase.auth.GoogleAuthProvider.credential(gPlusUser.idToken));
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   linkSocialProfile(provider: firebase.auth.AuthProvider) {
     this.afAuth.currentUser.then((user) => {

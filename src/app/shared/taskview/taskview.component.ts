@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 import { Task } from 'src/app/interfaces/tasks';
 import { CompressImageService } from 'src/app/services/CompressImage.service';
 import { TaskviewService } from 'src/app/services/taskview.service';
@@ -27,6 +27,7 @@ export class TaskviewComponent implements OnInit {
     private compressImage: CompressImageService,
     private loader: LoaderService,
     private fireStore: AngularFireStorage,
+    public alertController: AlertController
   ) { }
 
   ngOnInit() {
@@ -76,11 +77,38 @@ export class TaskviewComponent implements OnInit {
                   }
                 });
               })
-            )
+            ).subscribe(() => {
+              setTimeout(() => {
+                this.loader.stopLoader();
+                this.showAlertAboutImageUpload(true);
+              }, 2000);
+            })
+        }).catch((error) => {
+          console.log(error);
+          this.showAlertAboutImageUpload(false);
+          this.loader.stopLoader();
         })
       })
   }
+
+  async showAlertAboutImageUpload(status: boolean) {
+    let message = '';
+    if (status) {
+      message = 'You proof is uploaded, you will get points when your task got approved.'
+    } else {
+      message = 'You proof is not uploaded, There is some error, please try after some time.'
+    }
+    const alert = await this.alertController.create({
+      header: 'Email Verification',
+      // subHeader: 'Subtitle',
+      message: message,
+      buttons: [{ text: 'Ok' }]
+    });
+    await alert.present();
+  }
+
 }
+
 
 // console.log(compressedImage);
 // var file: File = compressedImage;

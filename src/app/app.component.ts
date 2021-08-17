@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LottieSplashScreen } from '@ionic-native/lottie-splash-screen/ngx';
 import { IonRouterOutlet, Platform } from '@ionic/angular';
 // import { BackgroundMode } from '@ionic-native/background-mode/ngx';
 import { slideInAnimation } from './services/animation';
@@ -20,6 +21,7 @@ export class AppComponent {
     // private autostart: Autostart,
     // private androidPermissions: AndroidPermissions,
     private platform: Platform,
+    splashScreen: LottieSplashScreen
     // private routerOutlet: IonRouterOutlet
   ) {
     console.log(this.platform.platforms())
@@ -41,6 +43,9 @@ export class AppComponent {
       //   }
       // });
     }
+    platform.ready().then(() => {
+      splashScreen.hide();
+    })
 
     // this.fcmService.initPush();
   }
