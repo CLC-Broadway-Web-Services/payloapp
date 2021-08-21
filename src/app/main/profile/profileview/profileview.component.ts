@@ -27,7 +27,7 @@ export class ProfileviewComponent implements OnInit {
 
   userData: Profile;
 
-  showSocial = true;
+  showSocial = false;
 
   // profile image
   selectedFile: File = null;

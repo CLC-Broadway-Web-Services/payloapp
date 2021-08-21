@@ -10,6 +10,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireAnalyticsModule, ScreenTrackingService, UserTrackingService } from '@angular/fire/analytics';
+import { AngularFirePerformanceModule, PerformanceMonitoringService } from '@angular/fire/performance';
+
 import { environment } from 'src/environments/environment';
 import { AuthService } from './services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
@@ -46,6 +49,8 @@ import { LottieSplashScreen } from '@ionic-native/lottie-splash-screen/ngx';
     AngularFireAuthModule,
     AngularFirestoreModule,
     AngularFireFunctionsModule,
+    AngularFireAnalyticsModule,
+    AngularFirePerformanceModule,
     ImageCropperModule
   ],
   providers: [
@@ -54,7 +59,10 @@ import { LottieSplashScreen } from '@ionic-native/lottie-splash-screen/ngx';
     AuthService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     Facebook,
-    GooglePlus
+    GooglePlus,
+    ScreenTrackingService,
+    UserTrackingService,
+    PerformanceMonitoringService
     // { provide: USE_FUNCTIONS_EMULATOR, useValue: environment.useEmulators ? ['localhost', 5001] : undefined },
     //  { provide: NEW_ORIGIN_BEHAVIOR, useValue: true },
     //  { provide: ORIGIN, useValue: 'http://localhost:5000/' },

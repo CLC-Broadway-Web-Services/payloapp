@@ -61,7 +61,7 @@
   </ion-item>
   <div class="dashTasksList" *ngIf="allTasksNotCompleted && allTasksNotCompleted.length > 0;">
     <ion-text>
-      <h4>Complete these old tasks to get more points.</h4>
+      <h6>Complete these old tasks to get more points.</h6>
     </ion-text>
 
     <ng-container *ngFor="let tasks of allTasksNotCompleted">
@@ -119,6 +119,84 @@
   </div>
   <div class="dashTasksList" *ngIf="!tasksForTodayAndRest" style="text-align: center;">
     <img src="../../../assets/animations/waiting-cat.gif" style="max-width: 200px;">
+  </div>
+  <ion-item button lines="none" detail="false" *ngIf="submittedTasks && submittedTasks.length > 0;">
+    <ion-label>
+      <b>You have {{submittedTasks.length}} tasks submitted </b>
+    </ion-label>
+    <ion-icon name="calendar-outline" slot="end"></ion-icon>
+  </ion-item>
+  <div class="dashTasksList" *ngIf="submittedTasks && submittedTasks.length > 0;">
+    <ng-container *ngFor="let tasks of submittedTasks">
+
+      <div class="task">
+        <ng-container>
+          <ion-card class="flexCard {{tasks.platform}}" (click)="showAlertForTask('submitted')">
+            <ion-card-content>
+              <ion-text>
+                <h2>{{tasks.platform | titlecase}} Task <b>({{tasks.pointPerTask}} <span
+                      [innerHtml]="global.sign"></span>)</b></h2>
+                <b>Task:-</b> {{tasks.platformTask | titlecase}} <br />
+                <ion-badge color="secondary">Submitted</ion-badge>
+              </ion-text>
+            </ion-card-content>
+          </ion-card>
+        </ng-container>
+      </div>
+
+    </ng-container>
+  </div>
+  <ion-item button lines="none" detail="false" *ngIf="completedTasks && completedTasks.length > 0;">
+    <ion-label>
+      <b>You have {{completedTasks.length}} tasks completed </b>
+    </ion-label>
+    <ion-icon name="calendar-outline" slot="end"></ion-icon>
+  </ion-item>
+  <div class="dashTasksList" *ngIf="completedTasks && completedTasks.length > 0;">
+    <ng-container *ngFor="let tasks of completedTasks">
+
+      <div class="task">
+        <ng-container>
+          <ion-card class="flexCard {{tasks.platform}}">
+            <ion-card-content>
+              <ion-text>
+                <h2>{{tasks.platform | titlecase}} Task <b>({{tasks.pointPerTask}} <span
+                      [innerHtml]="global.sign"></span>)</b></h2>
+                <b>Task:-</b> {{tasks.platformTask | titlecase}} <br />
+                <ion-badge color="success">Completed</ion-badge>
+              </ion-text>
+            </ion-card-content>
+          </ion-card>
+        </ng-container>
+      </div>
+
+    </ng-container>
+  </div>
+  <ion-item button lines="none" detail="false" *ngIf="rejectedTasks && rejectedTasks.length > 0;">
+    <ion-label>
+      <b>You have {{rejectedTasks.length}} tasks rejected </b>
+    </ion-label>
+    <ion-icon name="calendar-outline" slot="end"></ion-icon>
+  </ion-item>
+  <div class="dashTasksList" *ngIf="rejectedTasks && rejectedTasks.length > 0;">
+    <ng-container *ngFor="let tasks of rejectedTasks">
+
+      <div class="task">
+        <ng-container>
+          <ion-card class="flexCard {{tasks.platform}}" (click)="showAlertForTask('rejected', tasks.rejectReason)">
+            <ion-card-content>
+              <ion-text>
+                <h2>{{tasks.platform | titlecase}} Task <b>({{tasks.pointPerTask}} <span
+                      [innerHtml]="global.sign"></span>)</b></h2>
+                <b>Task:-</b> {{tasks.platformTask | titlecase}} <br />
+                <ion-badge color="danger">Rejected</ion-badge>
+              </ion-text>
+            </ion-card-content>
+          </ion-card>
+        </ng-container>
+      </div>
+
+    </ng-container>
   </div>
 
 </ion-content>

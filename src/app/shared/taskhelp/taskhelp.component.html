@@ -1,13 +1,13 @@
 <ion-header translucent>
   <ion-toolbar>
-    <ion-title>{{taskPlatfrom | titlecase}} | {{taskType | titlecase}}</ion-title>
+    <ion-title>{{task.platform | titlecase}} | {{task.platformTask | titlecase}}</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="dismissModal()">Close</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content fullscreen class="ion-padding howToContentPanel">
-  <ng-container *ngIf="taskPlatfrom == 'facebook'">
+  <!-- <ng-container *ngIf="taskPlatfrom == 'facebook'">
     <ion-text>
       <b>Go to facebook and then {{taskType}} the post (See below image)</b>
     </ion-text>
@@ -17,5 +17,12 @@
     <ion-text>
       <b>Get screenshot and upload on clicking the task again.</b>
     </ion-text>
-  </ng-container>
+  </ng-container> -->
+  <ion-text>
+    <b>{{task.howToTask.title}}</b>
+  </ion-text>
+  <img [src]="task.howToTask.image" />
+  <ion-text>
+    <b>{{task.howToTask.description}}</b>
+  </ion-text>
 </ion-content>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AlertController } from '@ionic/angular';
 import { Task } from 'src/app/interfaces/tasks';
 import { AuthService } from 'src/app/services/auth.service';
 import { GlobalFunctionsService } from 'src/app/services/global-functions.service';
@@ -14,6 +15,9 @@ export class DashboardComponent implements OnInit {
   allTasks: Task[] = [];
   todaysTaskOnly: Task[] = [];
   allTasksNotCompleted: Task[] = [];
+  submittedTasks: Task[] = [];
+  completedTasks: Task[] = [];
+  rejectedTasks: Task[] = [];
 
   tasksForTodayAndRest = false;
 
@@ -22,6 +26,7 @@ export class DashboardComponent implements OnInit {
   weeklyTasksTotal = 0;
 
   constructor(
+    public alertController: AlertController,
     public global: GlobalFunctionsService,
     public taskService: TaskviewService,
     private auth: AuthService
@@ -39,37 +44,51 @@ export class DashboardComponent implements OnInit {
         const today = this.formatDate(todayDate);
         console.log(today);
 
-        const completedTasks = tasks.filter((task) => {
-          return task.isApproved;
-        })
         const todaysTask = tasks.filter((task) => {
-          return task.allotedDate == today;
+          return task.allotedDate == today && !task.isSubmitted && !task.isApproved && !task.isRejected;
         })
         const notCompletedTasksThisWeek = tasks.filter((task) => {
-          return !task.isApproved && !task.isExpired && !task.isSubmitted;
+          return task.allotedDate != today && !task.isSubmitted && !task.isApproved && !task.isRejected;
         })
+        const submittedTasksThisWeek = tasks.filter((task) => {
+          return task.isSubmitted && !task.isApproved && !task.isRejected;
+        })
+        const completedTasksThisWeek = tasks.filter((task) => {
+          return task.isSubmitted && task.isApproved && !task.isRejected;
+        })
+        const rejectedTasksThisWeek = tasks.filter((task) => {
+          return task.isSubmitted && task.isRejected;
+        })
+
 
         this.todaysTaskOnly = todaysTask;
         this.allTasksNotCompleted = notCompletedTasksThisWeek;
+        this.submittedTasks = submittedTasksThisWeek;
+        this.completedTasks = completedTasksThisWeek;
+        this.rejectedTasks = rejectedTasksThisWeek;
 
-        const totalTasksToShow = (todaysTask.length+notCompletedTasksThisWeek.length);
+        const totalTasksToShow = (todaysTask.length + notCompletedTasksThisWeek.length);
 
-        if(totalTasksToShow > 0) {
+        if (totalTasksToShow > 0) {
           this.tasksForTodayAndRest = true;
         } else {
           this.tasksForTodayAndRest = false;
         }
 
-        console.log(todaysTask)
-        console.log(notCompletedTasksThisWeek)
+        console.log(tasks);
+        // console.log(notCompletedTasksThisWeek)
 
-        const totalTasksLength = tasks.length; // 100
-        const completedTasksLength = completedTasks.length; // 40
-        const tasksPercentage = totalTasksLength / 100;
+        // const totalTasksLength = tasks.length; // 100
+        // const completedTasksLength = completedTasksThisWeek.length; // 40
+        // const tasksPercentage = totalTasksLength / 100;
+
+        // const percentage = ((completedTasks.length/tasks.length)*100).toFixed(2)
+        const percentage = (completedTasksThisWeek.length / tasks.length) * 100
 
         // this.weeklyTasksPercentage = Math.ceil(tasksPercentage*completedTasksLength);
-        this.weeklyTasksPercentage = tasksPercentage * completedTasksLength;
-        this.weeklyTasksCompleted = completedTasks.length;
+        // this.weeklyTasksPercentage = tasksPercentage * completedTasksLength;
+        this.weeklyTasksPercentage = percentage;
+        this.weeklyTasksCompleted = completedTasksThisWeek.length;
         this.weeklyTasksTotal = tasks.length;
       }
     })
@@ -91,6 +110,33 @@ export class DashboardComponent implements OnInit {
   }
   taskActionSheet(data) {
     this.taskService.toggleTaskView(data);
+  }
+
+  async showAlertForTask(alertType, message = '') {
+    let title = '';
+    let data = '';
+    if (alertType == 'submitted') {
+      title = 'Task Submitted.';
+      data = 'Please wait till your submitted screenshot will be approved or rejected after verification.';
+    }
+    if (alertType == 'rejected') {
+      title = 'Task Rejected.';
+      data = 'your task is rejected, please read the reason below <br/> ' + message;
+    }
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: title,
+      message: data,
+      buttons: [
+        {
+          text: 'Okay',
+          handler: () => {
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
 }

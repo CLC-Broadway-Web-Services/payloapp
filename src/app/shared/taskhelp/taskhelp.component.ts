@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { Task } from 'src/app/interfaces/tasks';
 
 @Component({
   selector: 'app-taskhelp',
@@ -7,8 +8,7 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['./taskhelp.component.scss'],
 })
 export class TaskhelpComponent implements OnInit {
-  @Input() taskPlatfrom: string;
-  @Input() taskType: string;
+  @Input() task: Task;
 
   constructor(public modalController: ModalController) { }
 

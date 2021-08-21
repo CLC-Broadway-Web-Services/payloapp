@@ -19,7 +19,7 @@ export const environment = {
     appId: "1:266350440925:web:d2fe77341b39c4839ec634",
     measurementId: "G-J2PXRC54X9",
   },
-  website: 'https://noworkneeded.web.app/'
+  website: 'https://payloapp.in/'
   // apiUrl: 'http://localhost:3000/'
 };
 

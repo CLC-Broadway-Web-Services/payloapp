@@ -42,12 +42,11 @@ export class TaskviewService {
     return await modal.present();
   }
 
-  async presentHelpModal(platform, task) {
+  async presentHelpModal(task) {
     const modal = await this.modalController.create({
       component: TaskhelpComponent,
       componentProps: {
-        taskPlatfrom: platform,
-        taskType: task,
+        task: task,
       },
       cssClass: 'showTaskPopup',
       swipeToClose: true,

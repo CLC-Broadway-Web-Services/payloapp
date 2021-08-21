@@ -99,7 +99,7 @@ export class TaskviewComponent implements OnInit {
       message = 'You proof is not uploaded, There is some error, please try after some time.'
     }
     const alert = await this.alertController.create({
-      header: 'Email Verification',
+      header: 'Proof uploadeding',
       // subHeader: 'Subtitle',
       message: message,
       buttons: [{ text: 'Ok' }]

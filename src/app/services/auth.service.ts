@@ -144,11 +144,10 @@ export class AuthService {
         this.tasksListSubscription = this.afs.collectionGroup('tasks',
           (ref) => ref
             .where('uid', '==', user.uid)
-            .where('isSubmitted', '==', false)
-            .where('isApproved', '==', false)
-            .where('isExpired', '==', false)
-            // .where('allotedDate', '>=', lastWeek)
-            // .where('allotedDate', '<=', today)
+            // .where('isSubmitted', '==', false)
+            // .where('isApproved', '==', false)
+            // .where('isExpired', '==', false)
+            .where('allotedDate', '>=', lastWeek)
             .orderBy('allotedDate', 'desc')
         ).snapshotChanges().pipe(
           map(actions => actions.map(a => {
