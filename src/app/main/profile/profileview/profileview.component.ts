@@ -31,7 +31,7 @@ export class ProfileviewComponent implements OnInit {
 
   // profile image
   selectedFile: File = null;
-  fb;
+  fb: string;
   downloadURL: Observable<string>;
   phoneRecaptchaVerifier: firebase.default.auth.RecaptchaVerifier;
 
@@ -385,6 +385,4 @@ export class ProfileviewComponent implements OnInit {
       })
     })
   }
-
-
 }
