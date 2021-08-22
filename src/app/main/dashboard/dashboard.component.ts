@@ -45,6 +45,10 @@ export class DashboardComponent implements OnInit {
         console.log(today);
 
         const todaysTask = tasks.filter((task) => {
+          // const condition1 = task.allotedDate == today && !task.isSubmitted && !task.isApproved && !task.isRejected;
+          // const condition2 = task.allotedDate == today && !task.isSubmitted && !task.isApproved && !task.isRejected;
+          // const condition1 = task.allotedDate == today && !task.isSubmitted && !task.isApproved && !task.isRejected;
+          // const condition1 = task.allotedDate == today && !task.isSubmitted && !task.isApproved && !task.isRejected;
           return task.allotedDate == today && !task.isSubmitted && !task.isApproved && !task.isRejected;
         })
         const notCompletedTasksThisWeek = tasks.filter((task) => {

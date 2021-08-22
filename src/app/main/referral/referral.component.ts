@@ -5,6 +5,7 @@ import { Share } from '@capacitor/share';
 import { ReferralpopupComponent } from './referralpopup/referralpopup.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { Profile } from 'src/app/interfaces/profile';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 
 
@@ -106,6 +107,7 @@ export class ReferralComponent implements OnInit {
   // ];
 
   currentUserData: Profile;
+  myInviteCode = '';
 
   contentForTerms: string = 'Terms of service content.';
   contentForHowTo: string = '<ion-text> <div class="ion-padding"> <h4>Referral / Invite System.</h4> <p>You will get points when someone Join Paylo via your Invite Code.</p> </div> <ion-list> <ion-item> <ion-label>First 10 Joinings</ion-label> <ion-text slot="end">5 Pts</ion-text> </ion-item> <ion-item> <ion-label>Second 10 Joinings</ion-label> <ion-text slot="end">3 Pts</ion-text> </ion-item> <ion-item> <ion-label>After 20 Joinings</ion-label> <ion-text slot="end">2 Pts</ion-text> </ion-item></ion-list></ion-text>';
@@ -113,13 +115,17 @@ export class ReferralComponent implements OnInit {
   constructor(
     public global: GlobalFunctionsService,
     // public actionSheetController: ActionSheetController,
+    private afs: AngularFirestore,
     public modalController: ModalController,
     private auth: AuthService
   ) { }
 
   ngOnInit() {
     this.auth.userData.asObservable().subscribe((user) => {
-      this.currentUserData = user;
+      // console.log(user);
+      if(user) {
+        this.currentUserData = user;
+      }
     })
   }
 
@@ -133,11 +139,11 @@ export class ReferralComponent implements OnInit {
 
   async socialShare() {
     console.log('social share clicked');
-    const inviteCode: string = this.currentUserData && this.currentUserData.myInviteCode ? this.currentUserData.myInviteCode : "PL0011223344";
+    const inviteCode: string = this.currentUserData.myInviteCode;
     await Share.share({
       title: 'PayLo | रोज़ का रोज़गार',
       text: 'Create account on Paylo & get (रोज़ का रोज़गार), User my code for registration:- ' + inviteCode,
-      url: 'http://google.com/',
+      url: 'http://payloapp.in/',
       dialogTitle: 'Share & Get Rewards',
     }).then((response) => {
       console.log(response)

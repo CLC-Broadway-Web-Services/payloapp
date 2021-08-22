@@ -64,7 +64,7 @@ export class AuthService {
 
         this.userState = user;
 
-        console.log(this.formatDate(date));
+        // console.log(this.formatDate(date));
 
         // if (!this.userDataSubscription) {
         this.userDataSubscription = this.afs.doc(`users/${user.uid}`).valueChanges().subscribe(async (data: Profile) => {
@@ -73,74 +73,27 @@ export class AuthService {
             if (user.emailVerified == true && data.emailVerified == false) {
               this.afs.doc(`users/${user.uid}`).set({ emailVerified: true }, { merge: true });
             }
+            this.afs.collection('inviteCodes', ref => ref.where('uid', '==', user.uid)).get().subscribe((invitedata: any) => {
+              // console.log(invitedata);
+              invitedata.forEach((invitecode) => {
+                // console.log(invitecode.data().code);
+                const inviteCodeData = {
+                  myInviteCode: invitecode.data().code
+                }
+                this.userData.next({ ...data, ...inviteCodeData })
+              })
+            })
             localStorage.setItem('userData', JSON.stringify(data));
             JSON.parse(localStorage.getItem('userData'));
           }
-          // else {
-          //   const userDataForFirestore = {
-          //     photoURL: '',
-          //     city: '',
-          //     dob: '',
-          //     state: '',
-          //     phoneNumberVerify: false,
-          //     totalReferrals: 0,
-          //     completedTasks: 0,
-          //     country: 'IN',
-          //     uid: user.uid,
-          //     email: user.email,
-          //     phoneNumber: user.phoneNumber,
-          //     displayName: user.displayName,
-          //     emailVerified: false,
-          //     inviteCode: 'PL0011223344',
-          //     claim: 'user',
-          //     myInviteCode: this.getRandomNumbe()
-          //   };
-          //   await this.afs.collection('users').doc(user.uid).set(userDataForFirestore, {
-          //     merge: true
-          //   });
-          // }
         })
-        console.log(user);
-        // }
-
-        // if (!this.pointsWalletSubscription) {
         this.pointsWalletSubscription = this.afs.doc(`pointsWallet/${user.uid}`).valueChanges().subscribe((wallet: Wallet) => {
           if (wallet) {
             const id = user.uid
             const cWallet = { id, ...wallet }
             this.userWallet.next(cWallet);
           }
-          // else {
-          //   const newWallet = {
-          //     id: user.uid,
-          //     totalPoints: 0,
-          //     currentPoints: 0,
-          //     totalConvertedPoints: 0,
-          //     convertionRateInitial: 1,
-          //     totalConvertedAmount: 0,
-          //     withdrawlAmount: 0,
-          //     userUpi: '',
-          //     uid: user.uid
-          //   }
-          //   this.afs.collection(`pointsWallet/`).doc(user.uid).set(newWallet, { merge: true }).catch((err) => {
-          //     console.log(err);
-          //   })
-          // }
         })
-        // }
-
-        // if (!this.tasksListSubscription) {
-        // this.tasksListSubscription = this.afs.collectionGroup('tasks',
-        //   (ref) => ref
-        //     .where('uid', '==', user.uid)
-        //     .where('allotedDate', '>=', lastWeek)
-        //     // .where('allotedDate', '<=', today)
-        //     .orderBy('allotedDate', 'desc')
-        // ).valueChanges({ id: 'id' }).subscribe((tasks: Task[]) => {
-        //   console.log(tasks)
-        //   this.userTasks.next(tasks);
-        // })
-
         this.tasksListSubscription = this.afs.collectionGroup('tasks',
           (ref) => ref
             .where('uid', '==', user.uid)
@@ -149,17 +102,28 @@ export class AuthService {
             // .where('isExpired', '==', false)
             .where('allotedDate', '>=', lastWeek)
             .orderBy('allotedDate', 'desc')
-        ).snapshotChanges().pipe(
-          map(actions => actions.map(a => {
-            let data = a.payload.doc.data();
-            data['id'] = a.payload.doc.id;
-            return data;
-          }))
-        ).subscribe((tasks: Task[]) => {
-          console.log(tasks)
+        ).valueChanges().subscribe((tasks: Task[]) => {
+          // console.log(tasks)
           this.userTasks.next(tasks);
         })
-        // }
+        // this.tasksListSubscription = this.afs.collectionGroup('tasks',
+        //   (ref) => ref
+        //     .where('uid', '==', user.uid)
+        //     // .where('isSubmitted', '==', false)
+        //     // .where('isApproved', '==', false)
+        //     // .where('isExpired', '==', false)
+        //     .where('allotedDate', '>=', lastWeek)
+        //     .orderBy('allotedDate', 'desc')
+        // ).snapshotChanges().pipe(
+        //   map(actions => actions.map(a => {
+        //     let data = a.payload.doc.data();
+        //     data['id'] = a.payload.doc.id;
+        //     return data;
+        //   }))
+        // ).subscribe((tasks: Task[]) => {
+        //   // console.log(tasks)
+        //   this.userTasks.next(tasks);
+        // })
         user.providerData.some((data) => {
           if (data.providerId == 'google.com') {
             this.googleConnected = true;
