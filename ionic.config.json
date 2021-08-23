@@ -1,0 +1,7 @@
+{
+  "name": "PayLo",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

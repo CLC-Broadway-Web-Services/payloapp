@@ -1,0 +1,23 @@
+<!-- <ion-header> -->
+<!-- <ion-toolbar> -->
+<!-- <ion-title>{{firstName}}</ion-title> -->
+<!-- <ion-buttons slot="end" class="text-right" style="display: block;">-->
+<!-- <ion-button class="customCloseButtonTaskview" color="dark" fill="clear" style="float: right;" size="large" (click)="dismissModal()">
+    <ion-icon name="close-outline"></ion-icon>
+  </ion-button> -->
+<!-- </ion-buttons>  -->
+<!-- </ion-toolbar> -->
+<!-- </ion-header> -->
+<!-- <ion-buttons> -->
+<input #uploadProof type="file" accept="image/*" (change)="upload($event, fullTask)"
+  style="display: none; width:0;height: 0;" hidden>
+<!-- <ion-button expand="block" color="primary" shape="round" (click)="openLink(fullTask.url)">Start Task - ({{taskType |
+    titlecase}})</ion-button> -->
+<ion-button expand="block" color="primary" shape="round" [href]="fullTask.url">
+  Start Task - ({{taskType | titlecase}})
+</ion-button>
+<ion-button expand="block" color="success" shape="round" (click)="uploadProof.click()">Upload Proof</ion-button>
+<ion-button expand="block" color="secondary" shape="round"
+  (click)="taskService.presentHelpModal(fullTask)">How to !</ion-button>
+<ion-button expand="block" color="danger" shape="round" (click)="dismissModal()">Close</ion-button>
+<!-- </ion-buttons> -->

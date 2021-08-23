@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Pay Lo</string>
+    <string name="title_activity_main">Pay Lo</string>
+    <string name="package_name">com.thevanar.paylo</string>
+    <string name="custom_url_scheme">com.thevanar.paylo</string>
+</resources>

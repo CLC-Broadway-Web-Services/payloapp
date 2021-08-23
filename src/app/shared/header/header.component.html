@@ -1,0 +1,14 @@
+<!-- <ion-item lines="none" style="--padding-start: 0; --padding-end: 0;"> -->
+  <ion-thumbnail id="userAvatar" [routerLink]="['/main/profile']">
+    <!-- <span class="notifyIcon"></span> -->
+    <img [src]="userData && userData.photoURL ? userData.photoURL : defaultAvatar">
+  </ion-thumbnail>
+  <ion-label style="text-align: right;  float: right;">
+    <h3>Welcome {{userData && userData.displayName ? userData.displayName : userData ? userData.uid : ''}}</h3>
+    <p>Total points: &#x20B1;&#x2C60; {{userWallet && userWallet.currentPoints ? userWallet.currentPoints : 0}}</p>
+  </ion-label>
+<!-- </ion-item> -->
+<!-- <ion-thumbnail id="userAvatar">
+  <span class="notifyIcon"></span>
+  <img src="assets/default-avatar.png">
+</ion-thumbnail> -->

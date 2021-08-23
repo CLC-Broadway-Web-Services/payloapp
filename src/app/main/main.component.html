@@ -1,0 +1,29 @@
+<!-- <ion-router-outlet></ion-router-outlet> -->
+
+<div [@routeAnimations]="prepareRoute(outlet)">
+  <ion-router-outlet #outlet="outlet"></ion-router-outlet>
+</div>
+<ion-tabs id="customTabBar">
+  <!-- <app-taskview></app-taskview> -->
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="dashboard">
+      <ion-icon size="small" name="home-outline"></ion-icon>
+    </ion-tab-button>
+
+    <!-- <ion-tab-button tab="tasks">
+      <ion-icon size="small" name="document-text-outline"></ion-icon>
+    </ion-tab-button> -->
+
+    <ion-tab-button tab="earnings">
+      <ion-icon size="small" name="diamond-outline"></ion-icon>
+    </ion-tab-button>
+
+    <ion-tab-button tab="referrals">
+      <ion-icon size="small" name="ticket-outline"></ion-icon>
+    </ion-tab-button>
+
+    <ion-tab-button tab="profile">
+      <ion-icon size="small" name="person-outline"></ion-icon>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

@@ -1,0 +1,52 @@
+<ion-content class="ion-padding">
+  <!-- <div class="ion-padding-top">
+    <ion-segment (ionChange)="refersChanged($event)" [value]='showShareModule'>
+      <ion-segment-button [value]=true>
+        <ion-label>Share to Earn</ion-label>
+      </ion-segment-button>
+      <ion-segment-button [value]=false>
+        <ion-label>Invited List</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </div> -->
+  <div id="shareModule" *ngIf="showShareModule">
+    <div class="ion-padding-top ion-margin-bottom">
+      <ion-item lines="none">
+        <ion-label>Total invited users: <ion-text style="float: right;">{{currentUserData && currentUserData.totalReferrals ? currentUserData.totalReferrals : 0}}</ion-text>
+        </ion-label>
+      </ion-item>
+    </div>
+    <ion-card class="ion-padding-bottom ion-no-margin ion-text-center">
+      <div>
+        <img src="../../../assets/sharing.png" style="width:230px;margin:auto;" />
+        <ion-text>
+          <h3>share to get points</h3>
+          <p class="ion-padding">
+            You invite your friends & they register with your invite code. Every registration gets you 5* points.<br/>
+            Invite Code:- <b>{{currentUserData && currentUserData.myInviteCode ? currentUserData.myInviteCode : ""}}</b>
+          </p>
+        </ion-text>
+        <ion-button color="primary" (click)="socialShare()"> Share Here <ion-icon name="arrow-redo-outline"></ion-icon>
+        </ion-button>
+      </div>
+    </ion-card>
+    <div class="ion-padding-top">
+      <ion-item lines="none" (click)="presentHowToModal()">
+        <ion-text color="primary">How invite system works?</ion-text>
+      </ion-item>
+      <!-- <ion-item lines="none" (click)="presentTermsModal()">
+        <ion-text color="primary">Terms of service</ion-text>
+      </ion-item> -->
+    </div>
+  </div>
+  <!-- <div id="inviteListModule" *ngIf="!showShareModule">
+    <div class="ion-padding-top ion-margin-bottom">
+      <ion-virtual-scroll [items]="referListData" approxItemHeight="320px">
+        <ion-item lines="none"*virtualItem="let item; let itemBounds = bounds;">
+          <ion-label>{{item.name}}<br/><small>{{item.date}}</small></ion-label>
+          <ion-text slot="end">{{item.points}} <span [innerHtml]="global.sign"></span></ion-text>
+        </ion-item>
+      </ion-virtual-scroll>
+    </div>
+  </div> -->
+</ion-content>

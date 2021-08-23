@@ -1,0 +1,151 @@
+<ion-content class="ion-padding">
+  <div class="ion-padding-top">
+    <ion-segment (ionChange)="modulePageChange($event)" [value]='showModule'>
+      <ion-segment-button value="wallet">
+        <ion-label>Wallet</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="conversions">
+        <ion-label>Conversions</ion-label>
+      </ion-segment-button>
+      <!-- <ion-segment-button value="history">
+        <ion-label>History</ion-label>
+      </ion-segment-button> -->
+    </ion-segment>
+  </div>
+  <div id="walletModule" *ngIf="showModule === 'wallet'">
+    <!-- Main Card -->
+    <ion-card class="ion-margin-top ion-no-margin">
+      <ion-card-header>
+        <ion-card-subtitle>Your current/total points</ion-card-subtitle>
+        <ion-card-title>{{myWallet.currentPoints}}/<small>{{myWallet.totalPoints}}&nbsp;&nbsp;</small> <span
+            [innerHtml]="global.sign"></span></ion-card-title>
+      </ion-card-header>
+      <ion-card-header>
+        <ion-card-subtitle>Your converted points to rupees</ion-card-subtitle>
+        <ion-card-title><small>{{myWallet.totalConvertedPoints}}&nbsp;&nbsp;<span [innerHtml]="global.sign"></span> /
+            {{myWallet.totalConvertedAmount}}&nbsp;&nbsp;&#8377;</small></ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        When converting you need minimum 60 <span [innerHtml]="global.sign"></span> have in the wallet.<br />
+        Minimum converted points will be 50 <span [innerHtml]="global.sign"></span><br /><br />
+        <span *ngIf="myWallet.userUpi" (click)="showUpiForm = true">
+          Your Upi Id is:-<br />
+          {{myWallet.userUpi}}
+          <span style="float: right;">
+            <ion-icon name="create-outline"></ion-icon>
+          </span>
+        </span>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- UPI Form -->
+    <ion-card class="ion-margin-top ion-no-margin" *ngIf="!myWallet.userUpi || showUpiForm">
+      <ion-card-header>
+        <ion-card-subtitle>Add UPI</ion-card-subtitle>
+        <ion-card-subtitle>For converting the points you need to be have an UPI ID</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content [formGroup]="upiForm" (ngSubmit)="saveUpiId()">
+        <ion-item class="customInputItem2">
+          <!-- <ion-icon><span [innerHtml]="global.sign"></span></ion-icon> -->
+          <!-- <ion-icon color="success" slot="end" name="checkmark-done-circle-outline" *ngIf="loginForm.controls.email.valid"></ion-icon> -->
+          <!-- <ion-icon color="danger" slot="end" name="close-circle-outline" *ngIf="loginForm.controls.email.invalid && (loginForm.controls.email.dirty || loginForm.controls.email.touched)"></ion-icon> -->
+          <ion-input formControlName="userUpi" type="text" placeholder="ex: upi@bank"></ion-input>
+        </ion-item>
+        <ion-button type="submit" (click)="saveUpiId()" shape="round" class="shadow ion-margin-top" color="secondary"
+          expand="block">Save UPI</ion-button>
+        <ion-button type="button" (click)="showUpiForm = false" shape="round" class="shadow ion-margin-top"
+          color="danger" expand="block" *ngIf="myWallet.userUpi && showUpiForm">Cancel</ion-button>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Points Withdrawl Form -->
+    <ion-card class="ion-margin-top ion-no-margin"
+      *ngIf="myWallet.userUpi && myWallet.currentPoints >= 60 && !showUpiForm">
+      <ion-card-header>
+        <ion-card-subtitle>Convert your points</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content [formGroup]="walletForm" (ngSubmit)="createWithdrawlRequest()">
+        <ion-item class="customInputItem2">
+          <!-- <ion-icon><span [innerHtml]="global.sign"></span></ion-icon> -->
+          <!-- <ion-icon color="success" slot="end" name="checkmark-done-circle-outline" *ngIf="loginForm.controls.email.valid"></ion-icon> -->
+          <!-- <ion-icon color="danger" slot="end" name="close-circle-outline" *ngIf="loginForm.controls.email.invalid && (loginForm.controls.email.dirty || loginForm.controls.email.touched)"></ion-icon> -->
+          <ion-input formControlName="points" value="50" type="number" min="50"></ion-input>
+        </ion-item>
+        <ion-label><b>Convert into:-</b> {{walletForm.controls.amount.value}} &#8377;</ion-label>
+        <ion-button (click)="createWithdrawlRequest()" type="submit" shape="round" class="shadow ion-margin-top"
+          color="secondary" expand="block">Convert & Request</ion-button>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Less Points Notice -->
+    <ion-card class="ion-margin-top ion-no-margin" *ngIf="myWallet.currentPoints < 60">
+      <ion-card-content>
+        <ion-text color="danger">
+          You dont have enough points to convert, please earn minimum 60 points to make 50 point conversion.
+        </ion-text>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <div id="convertionsModule" *ngIf="showModule === 'conversions'">
+    <div class="ion-padding-top ion-margin-bottom">
+      <div *ngIf="convertionWithdrawls && convertionWithdrawls.length > 0; else noConversions">
+        <ion-virtual-scroll [items]="convertionWithdrawls" approxItemHeight="320px">
+          <ion-item *virtualItem="let item; let i = index" id="{{i}}"
+            (click)="showAlertForConvertion(item.id)">
+            <ion-label>{{item.points}} <span [innerHtml]="global.sign"></span> to {{item.amount}} &#8377;
+              <br /><small>@ {{item.timeCreated | date:"medium"}}</small>
+              <br /><small>@ UPI:- {{item.upi_id}}</small>
+            </ion-label>
+            <ion-badge slot="end" color="primary"
+              *ngIf="item.isRequested && !item.isCompleted && !item.isRejected && !item.isOnHold">In Process</ion-badge>
+            <ion-badge slot="end" color="success"
+              *ngIf="item.isRequested && item.isCompleted && !item.isRejected && !item.isOnHold">Completed</ion-badge>
+            <ion-badge slot="end" color="danger"
+              *ngIf="item.isRequested && !item.isCompleted && item.isRejected && !item.isOnHold">Rejected</ion-badge>
+            <ion-badge slot="end" color="warning"
+              *ngIf="item.isRequested && !item.isCompleted && !item.isRejected && item.isOnHold">On-Hold</ion-badge>
+          </ion-item>
+        </ion-virtual-scroll>
+      </div>
+      <ng-template #noConversions>
+        You dont have any conversions yet
+      </ng-template>
+    </div>
+  </div>
+  <div id="historyModule" *ngIf="showModule === 'history'">
+    <div class="ion-padding-top ion-margin-bottom">
+      <ion-list *ngIf="pointsHistory && pointsHistory.length > 0">
+        <ion-item *ngFor="let point of pointsHistory; let i = index" id="{{i}}" id="{{i}}">
+          <ion-label> {{point.taskId ? 'Task' : 'Invited User'}}</ion-label>
+          <ion-text slot="end">{{point.points}} <span [innerHtml]="global.sign"></span></ion-text>
+        </ion-item>
+        <!-- <ion-item>
+          <ion-label> Facebook <small><b>Task</b></small><br /><small>Like, Comment, Share</small><br /><small>Mon, Jun
+              29 2021</small></ion-label>
+          <ion-text slot="end">15 <span [innerHtml]="global.sign"></span></ion-text>
+        </ion-item>
+        <ion-item>
+          <ion-label>Ahtesham<br /><small>Mon, Jun 29 2021</small></ion-label>
+          <ion-text slot="end">5 <span [innerHtml]="global.sign"></span></ion-text>
+        </ion-item>
+        <ion-item>
+          <ion-label>Ahtesham<br /><small>Mon, Jun 29 2021</small></ion-label>
+          <ion-text slot="end">5 <span [innerHtml]="global.sign"></span></ion-text>
+        </ion-item>
+        <ion-item>
+          <ion-label>Ahtesham<br /><small>Mon, Jun 29 2021</small></ion-label>
+          <ion-text slot="end">5 <span [innerHtml]="global.sign"></span></ion-text>
+        </ion-item>
+        <ion-item>
+          <ion-label>Ahtesham<br /><small>Mon, Jun 29 2021</small></ion-label>
+          <ion-text slot="end">5 <span [innerHtml]="global.sign"></span></ion-text>
+        </ion-item>
+        <ion-item>
+          <ion-label>Ahtesham<br /><small>Mon, Jun 29 2021</small></ion-label>
+          <ion-text slot="end">5 <span [innerHtml]="global.sign"></span></ion-text>
+        </ion-item> -->
+      </ion-list>
+    </div>
+  </div>
+</ion-content>

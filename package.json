@@ -1,0 +1,106 @@
+{
+  "name": "paylo",
+  "version": "0.0.2",
+  "author": "BWS",
+  "homepage": "https://paylo.com/",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "^12.1.3",
+    "@angular/common": "~12.0.1",
+    "@angular/core": "~12.0.1",
+    "@angular/fire": "^6.1.5",
+    "@angular/forms": "~12.0.1",
+    "@angular/platform-browser": "~12.0.1",
+    "@angular/platform-browser-dynamic": "~12.0.1",
+    "@angular/router": "~12.0.1",
+    "@capacitor/android": "3.1.2",
+    "@capacitor/app": "1.0.2",
+    "@capacitor/core": "^3.0.0",
+    "@capacitor/haptics": "1.0.2",
+    "@capacitor/keyboard": "1.0.2",
+    "@capacitor/share": "^1.0.3",
+    "@capacitor/status-bar": "1.0.2",
+    "@ionic-native/app-preferences": "^5.35.0",
+    "@ionic-native/core": "^5.34.0",
+    "@ionic-native/facebook": "^5.35.0",
+    "@ionic-native/google-plus": "^5.35.0",
+    "@ionic-native/lottie-splash-screen": "^5.35.0",
+    "@ionic/angular": "^5.6.12",
+    "angular-animations": "^0.11.0",
+    "cordova-plugin-googleplus": "^8.5.2",
+    "firebase": "^8.8.0",
+    "ngx-circular-progress": "0.0.4",
+    "ngx-image-cropper": "^4.0.1",
+    "rxjs": "~6.6.0",
+    "tslib": "^2.0.0",
+    "zone.js": "~0.11.4"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "~12.0.1",
+    "@angular-eslint/builder": "~12.0.0",
+    "@angular-eslint/eslint-plugin": "~12.0.0",
+    "@angular-eslint/eslint-plugin-template": "~12.0.0",
+    "@angular-eslint/template-parser": "~12.0.0",
+    "@angular/cli": "~12.0.1",
+    "@angular/compiler": "~12.0.1",
+    "@angular/compiler-cli": "~12.0.1",
+    "@angular/language-service": "~12.0.1",
+    "@capacitor/cli": "3.1.1",
+    "@ionic/angular-toolkit": "^4.0.0",
+    "@ionic/lab": "3.2.10",
+    "@types/jasmine": "~3.6.0",
+    "@types/jasminewd2": "~2.0.3",
+    "@types/node": "^12.11.1",
+    "@typescript-eslint/eslint-plugin": "4.16.1",
+    "@typescript-eslint/parser": "4.16.1",
+    "eslint": "^7.31.0",
+    "eslint-plugin-import": "2.22.1",
+    "eslint-plugin-jsdoc": "30.7.6",
+    "eslint-plugin-prefer-arrow": "1.2.2",
+    "jasmine-core": "~3.7.1",
+    "jasmine-spec-reporter": "~5.0.0",
+    "karma": "~6.3.2",
+    "karma-chrome-launcher": "~3.1.0",
+    "karma-coverage": "~2.0.3",
+    "karma-coverage-istanbul-reporter": "~3.0.2",
+    "karma-jasmine": "~4.0.0",
+    "karma-jasmine-html-reporter": "^1.5.0",
+    "protractor": "~7.0.0",
+    "ts-node": "~8.3.0",
+    "typescript": "~4.2.4"
+  },
+  "description": "Roz ka rozgar",
+  "cordova": {
+    "plugins": {
+      "cordova-plugin-facebook4": {
+        "APP_ID": "992294788250084",
+        "APP_NAME": "Paylo - Roz ka rozgar",
+        "FACEBOOK_HYBRID_APP_EVENTS": "false",
+        "FACEBOOK_ANDROID_SDK_VERSION": "5.13.0"
+      },
+      "cordova-plugin-googleplus": {
+        "REVERSED_CLIENT_ID": "com.googleusercontent.apps.206201421419-9qbjdo1n40lf60d37ppko4a9tgp972ln"
+      },
+      "cordova-plugin-lottie-splashscreen": {},
+      "cordova-plugin-whitelist": {},
+      "cordova-plugin-statusbar": {},
+      "cordova-plugin-device": {},
+      "cordova-plugin-splashscreen": {},
+      "cordova-plugin-ionic-webview": {
+        "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
+      },
+      "cordova-plugin-ionic-keyboard": {}
+    },
+    "platforms": [
+      "android"
+    ]
+  }
+}

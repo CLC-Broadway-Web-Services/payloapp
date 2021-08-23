@@ -1,0 +1,25 @@
+// .customHeader {
+//   position: fixed;
+//   --background: transparent !important;
+//   background-color: transparent !important;
+// }
+// .headerPart {
+//  max-width: 50%;
+// }
+#userProfile {
+  float: left;
+}
+#userMenu {
+  float: right;
+}
+#customHeader {
+  display: block;
+}
+#userAvatar {
+  // display: block;
+  display: inline-block;
+}
+#userAvatar img {
+  border-radius: 10px;
+  box-shadow: -4px -2px 18px 0px rgb(0 0 0 / 20%);
+}

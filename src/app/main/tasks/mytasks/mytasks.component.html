@@ -1,0 +1,69 @@
+<ion-content class="ion-padding">
+  <app-header></app-header>
+  <!-- <div>
+    <ion-segment [value]="segmentValue" color="secondary">
+      <ion-segment-button value="today">
+        <ion-label>Today</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="yesterday">
+        <ion-label>Yesterday</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="{{today}}" (click)="openCalendar()">
+        <ion-datetime [pickerOptions]="calendarOptions" #selectDate displayFormat="MMM D, YYYY" value="{{today}}" display-timezone="utc"></ion-datetime>
+      </ion-segment-button>
+    </ion-segment>
+  </div> -->
+  <div class="ion-padding-top">
+    <ion-item>
+      <ion-label position="fixed">Tasks List:</ion-label>
+      <ion-datetime [pickerOptions]="calendarOptions" #selectDate displayFormat="MMM D, YYYY" value="{{today}}" display-timezone="utc"></ion-datetime>
+    </ion-item>
+  </div>
+  <div class="dashTasksList">
+
+    <div class="task">
+      <ion-card class="flexCard facebookBg">
+        <ion-card-content>
+          <ion-text>
+            <h2>Facebook Task <b>(15 <span [innerHtml]="global.sign"></span>)</b></h2>
+            <b>Like, Comment, Share</b> <br />(inProgress)
+          </ion-text>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <div class="task">
+      <ion-card class="flexCard youtubeBg">
+        <ion-card-content>
+          <ion-text>
+            <h2>YouTube Task <b>(15 <span [innerHtml]="global.sign"></span>)</b></h2>
+            <b>Like, Comment</b> <br />(inProgress)
+          </ion-text>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <div class="task">
+      <ion-card class="flexCard instagramBg">
+        <ion-card-content>
+          <ion-text>
+            <h2>Instagram Task <b>(15 <span [innerHtml]="global.sign"></span>)</b></h2>
+            <b>Like, Follow</b> <br />(waiting)
+          </ion-text>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <div class="task">
+      <ion-card class="flexCard twitterBg">
+        <ion-card-content>
+          <ion-text>
+            <h2>Twitter Task <b>(15 <span [innerHtml]="global.sign"></span>)</b></h2>
+            <b>Re-Tweet</b> <br />(waiting)
+          </ion-text>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+  </div>
+</ion-content>

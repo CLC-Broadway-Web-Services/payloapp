@@ -1,0 +1,51 @@
+<ion-button size="large" fill="clear" color="light" class="ion-no-padding ion-padding-end" (click)="globalService.back()">
+  <ion-icon size="large" name="chevron-back-outline"></ion-icon>
+</ion-button>
+<!-- <ion-buttons slot="start">
+  <ion-back-button fill="clear" color="light" class="ion-no-padding ion-padding-end" text="" icon="chevron-back-outline" defaultHref="auth"></ion-back-button>
+</ion-buttons> -->
+
+<div class="authMiddlePanel ion-padding-top">
+  <ion-text color="light">
+    <h1>
+      Welcome Back
+    </h1>
+  </ion-text>
+</div>
+
+<div id="bottomPanel" class="waves authForm">
+  <form [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()">
+  <ion-grid>
+    <ion-row class="ion-align-items-center">
+      <ion-col size="12" size-md="6">
+        <ion-item lines="none" class="customInputItem">
+          <ion-icon name="person-circle-outline"></ion-icon>
+          <ion-icon color="success" slot="end" name="checkmark-done-circle-outline"
+          *ngIf="loginForm.controls.email.valid"></ion-icon>
+          <ion-icon color="danger" slot="end" name="close-circle-outline"
+          *ngIf="loginForm.controls.email.invalid && (loginForm.controls.email.dirty || loginForm.controls.email.touched)"></ion-icon>
+          <ion-input formControlName="email" placeholder="Email" type="email" autocomplete="loginEMail" autocorrect="off"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="12" size-md="6">
+        <ion-item lines="none" class="customInputItem">
+          <ion-icon name="lock-closed-outline"></ion-icon>
+          <ion-icon color="success" slot="end" name="checkmark-done-circle-outline"
+          *ngIf="loginForm.controls.password.valid"></ion-icon>
+          <ion-icon color="danger" slot="end" name="close-circle-outline"
+          *ngIf="loginForm.controls.password.invalid && (loginForm.controls.password.dirty || loginForm.controls.password.touched)"></ion-icon>
+          <ion-input formControlName="password" placeholder="Password" type="password" autocomplete="loginPassword" autocorrect="off"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="12">
+        <ion-text><a>Forget password?</a></ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-align-items-center">
+      <ion-col size="12">
+        <ion-button type="submit" shape="round" class="shadow" color="primary" expand="block">Log in</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  </form>
+</div>
